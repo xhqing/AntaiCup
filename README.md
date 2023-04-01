@@ -1,7 +1,5 @@
-# 天池-安泰杯跨境电商智能算法大赛 冠军方案分享
+# 天池-安泰杯跨境电商智能算法大赛冠军方案
 [天池-跨境电商智能算法大赛](https://tianchi.aliyun.com/competition/entrance/231718/introduction)
-
-[代码相关问题，请到Issues区进行留言](https://github.com/RainFung/Tianchi-AntaiCup-International-E-commerce-Artificial-Intelligence-Challenge/issues)
 
 ## 赛题
 AliExpress是阿里巴巴海外购物网站，海外用户可以在AliExpress挑选购买自己心意的商品。AliExpress积累了大量的用户行为数据，本赛题旨在通过海量数据挖掘用户下一个可能交互商品，选手们可以提交预测的TOP30商品列表，排序越靠前命中得分越高。
@@ -112,9 +110,4 @@ Rcall Rate：
 
 ## 总结
 在本次比赛前期，我花费了大量精力进行数据探索和分析，基于对数据和业务的了解才确立了最终的方案和优化路线。当对数据之间的联系了然于心后，开始进行细致的特征工程以提取各种信息，在也是历史交互模型得分提升的关键。此后，为了提高召回率，尝试了Embedding、协同过滤等方法，但是由于数据量和category字段少的限制，都没取得太好的效果，开始基于业务理解，尝试建立关联度计算公式，通过不断搜索参数，取得了不错的召回率，由此建立关联商品模型，此时成绩也上升到第一名。最后阶段，我们开始提高模型的精度和稳定性，一是建立了用户判别模型对排序进行了优化，二是对模型进行了融合以及stacking，得到了0.6256分数，进一步扩大了领先优势。
-
-取胜关键 = 充分理解业务 + 完备的特征工程 + 合理建模方法 + 细致结果优化 + 坚持就是胜利
-
-> 本赛题相关资料目前已上传[GitHub](https://github.com/RainFung/Tianchi-AntaiCup-International-E-commerce-Artificial-Intelligence-Challenge)，代码待整理完毕后也将开源共享
-> Have a good time in Data Competition.
 
