@@ -122,11 +122,13 @@ def submit_transform(df, name=None):
     return df
 
 def save_hdf():
-    train = pd.read_csv('../data/Antai_AE_round2_train_20190813.zip')
-    test = pd.read_csv('../data/Antai_AE_round2_test_20190813.zip')
-    item = pd.read_csv('../data/Antai_AE_round2_item_attr_20190813.zip')
+    train = pd.read_csv('./data/Antai_AE/Antai_AE_round2_train_20190813.csv')
+    test = pd.read_csv('./data/Antai_AE/Antai_AE_round2_test_20190813.csv')
+    item = pd.read_csv('./data/Antai_AE/Antai_AE_round2_item_attr_20190813.csv')
 
     df = pd.concat([train.assign(is_train=1), test.assign(is_train=0)])
+    import pdb
+    pdb.set_trace()
     df.sort_values(by=['country_id', 'buyer_admin_id', 'irank'], ascending=[1, 1, 0], inplace=True)
     
     # 创建时间信息列
