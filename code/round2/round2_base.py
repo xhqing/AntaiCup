@@ -1,15 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
-
-
+import pandas as pd
 import inspect
 import os
-
-
-# In[2]:
-
 
 # 查看hdf文件是否已经生成
 def check_hdf(func, dtype='yyzz'):
@@ -21,9 +15,6 @@ def check_hdf(func, dtype='yyzz'):
         return df
     else:
         print('>>> generate ', path, dtype)
-
-
-# In[3]:
 
 
 def reduce_memory(data):
@@ -98,10 +89,6 @@ def reduce_memory(data):
     print("Missing Value list", NAlist)
     return data
 
-
-# In[4]:
-
-
 # 检查提交文件是否正确
 def check_subfile(df, name):
     label = pd.read_csv('../data/Antai_AE_round2_test_20190813.zip')
@@ -116,9 +103,6 @@ def check_subfile(df, name):
     if df.columns[0] != 'buyer_admin_id':
         raise ValueError('sub file columns dont contains buyer_country_id')
     df.to_csv('../submit/' + name, index=False, header=None)
-
-
-# In[5]:
 
 
 # top30sku，行列转换
@@ -136,10 +120,6 @@ def submit_transform(df, name=None):
         name = datetime.datetime.today().strftime('%m-%d') + '.csv'
     check_subfile(df, name)
     return df
-
-
-# In[6]:
-
 
 def save_hdf():
     train = pd.read_csv('../data/Antai_AE_round2_train_20190813.zip')
@@ -194,10 +174,6 @@ def save_hdf():
     df[df['irank']==5].to_hdf('../data/base', 'irank5')
     return df
 
-
-# In[8]:
-
-
 # 获取热销商品
 def get_hot(dtype='all'):
     # 提取整体数据
@@ -221,10 +197,6 @@ def get_hot(dtype='all'):
         hot.reset_index(drop=True).to_hdf('../data/hot.h5', 'all')
         return hot
 
-
-# In[2]:
-
-
 def get_hdf(dtype='all', data_type='base', if_filter_label=False, if_lastday=False, if_drop_duplicates=False, if_debug=False, is_train=None):
     """
     data_type: base 原始数据文件 
@@ -245,7 +217,6 @@ def get_hdf(dtype='all', data_type='base', if_filter_label=False, if_lastday=Fal
     if_debug : debug取前10000行
     is_train : 是否只取训练数据
     """
-    import pandas as pd
     
     # 基础数据文件
     path = '../data/' + data_type
@@ -286,10 +257,6 @@ def get_hdf(dtype='all', data_type='base', if_filter_label=False, if_lastday=Fal
     if if_debug:
         df = df[:100000]
     return df
-
-
-# In[10]:
-
 
 def get_user(dtype, data_type='base'):
     """用户分群：
@@ -382,9 +349,6 @@ def get_user(dtype, data_type='base'):
         recall.to_hdf(path, 'recall')
 
 
-# In[13]:
-
-
 def get_sample(dtype, data_type='base'):
     """样本选取
     all(34751160): 用户交互所有样本(排除irank1)，用于在冷启动预测中，过滤用户已历史交互的样本 
@@ -393,7 +357,6 @@ def get_sample(dtype, data_type='base'):
     
     Tips:baseline包含训练集历史有购买用户，rank仅包含训练集复购用户与测试集全量用户
     """
-    import os
     
     path = '../data/sample_' + data_type
     if os.path.exists(path):
@@ -421,10 +384,6 @@ def get_sample(dtype, data_type='base'):
         rank_sample = pd.merge(rank_sample, baseline.rename(columns = {'irank' : 'baseline'}), on=['buyer_admin_id', 'item_id'], how='left')
         rank_sample.to_hdf(path, 'rank')
 
-
-# In[ ]:
-
-
 def add_prefix(df, exclude_columns, prefix):
     if isinstance(exclude_columns, str):
         exclude_columns = [exclude_columns]
@@ -432,10 +391,6 @@ def add_prefix(df, exclude_columns, prefix):
     column_names = [col for col in df.columns if col not in exclude_columns]
     df.rename(columns = dict(zip(column_names, [prefix + name for name in column_names])), inplace=True)
     return df
-
-
-# In[5]:
-
 
 def group_func(df, group_func_dic, group_key):
     if isinstance(group_func_dic, str):
