@@ -10,14 +10,14 @@
 
 
 # %run round2_base.ipynb
-from round2_base import *
+# from round2_base import *
 
 
 # In[13]:
 
 
-sample = get_sample(dtype='rank')
-df = get_hdf('all', if_filter_label=True, if_drop_duplicates=True, if_lastday=True)
+# sample = get_sample(dtype='rank')
+# df = get_hdf('all', if_filter_label=True, if_drop_duplicates=True, if_lastday=True)
 
 
 # In[2]:

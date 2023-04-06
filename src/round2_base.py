@@ -223,17 +223,17 @@ def get_hdf(dtype='all', data_type='base', if_filter_label=False, if_lastday=Fal
     """
     
     # 基础数据文件
-    path = '../data/' + data_type
+    path = './data/' + data_type
     if dtype == 'all':
-        df = pd.concat([pd.read_hdf(path, 'train-half1'),
-                        pd.read_hdf(path, 'train-half2'),
-                        pd.read_hdf(path, 'test')])
+        df = pd.concat([pd.read_hdf(path+'/train-half1.h5'),
+                        pd.read_hdf(path+'/train-half2.h5'),
+                        pd.read_hdf(path+'/test.h5')])
     elif dtype == 'train':
-        df = pd.concat([pd.read_hdf(path, 'train-half1'),
-                        pd.read_hdf(path, 'train-half2')])
+        df = pd.concat([pd.read_hdf(path+'/train-half1.h5'),
+                        pd.read_hdf(path+'/train-half2.h5')])
     elif dtype == 'yyzz':
-        df = pd.concat([pd.read_hdf(path, 'yy'),
-                        pd.read_hdf(path, 'zz')])
+        df = pd.concat([pd.read_hdf(path+'/yy.h5'),
+                        pd.read_hdf(path+'/zz.h5')])
     else:
         df = pd.read_hdf(path, dtype)
 
