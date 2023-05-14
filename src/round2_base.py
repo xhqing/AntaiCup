@@ -164,6 +164,10 @@ def save_hdf():
     df = df.reset_index(drop=True)
     
     # 生成hdf文件
+    path = "./data/base/"
+    if not os.path.exists(path):
+        os.makedirs(path)
+
     df[df['is_train']==1][:30000000].to_hdf('./data/base/train-half1.h5', key='df', mode="w")
     df[df['is_train']==1][30000000:].to_hdf('./data/base/train-half2.h5', key='df', mode="w")
     df[df['is_train']==0].to_hdf('./data/base/test.h5', key='df', mode="w")
